@@ -21,7 +21,7 @@ go_library(
     visibility = ["//visibility:public"],
     deps = [
         "//proto:bootz",
-        "@com_github_openconfig_gnmi//errlist",
+        "@openconfig_gnmi//errlist",
         "@org_golang_google_grpc//codes",
         "@org_golang_google_grpc//status",
     ],

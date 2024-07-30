@@ -12,11 +12,11 @@ proto_library(
     srcs = ["entity.proto"],
     import_prefix = "github.com/openconfig/bootz",
     deps = [
-        "@local_repo_root//proto:bootz_proto",
-        "@com_github_openconfig_gnsi//authz:authz_proto",
-        "@com_github_openconfig_gnsi//certz:certz_proto",
-        "@com_github_openconfig_gnsi//pathz:pathz_proto",
+        "//proto:bootz_proto",
         "@com_google_protobuf//:struct_proto",
+        "@openconfig_gnsi//authz:authz_proto",
+        "@openconfig_gnsi//certz:certz_proto",
+        "@openconfig_gnsi//pathz:pathz_proto",
     ],
 )
 
@@ -30,10 +30,10 @@ go_proto_library(
     importpath = "github.com/openconfig/bootz/server/entitymanager/proto/entity",
     proto = ":entity_proto",
     deps = [
-        "@local_repo_root//proto:bootz_go_proto",
-        "@com_github_openconfig_gnsi//authz:authz_go_proto",
-        "@com_github_openconfig_gnsi//certz:certz_go_proto",
-        "@com_github_openconfig_gnsi//pathz:pathz_go_proto",
+        "//proto:bootz_go_proto",
+        "@openconfig_gnsi//authz:authz_go_proto",
+        "@openconfig_gnsi//certz:certz_go_proto",
+        "@openconfig_gnsi//pathz:pathz_go_proto",
     ],
 )
 

@@ -14,5 +14,7 @@
 
 load("@bazel_gazelle//:def.bzl", "gazelle")
 
+# gazelle:go_grpc_compilers @io_bazel_rules_go//proto:go_grpc_v2, @io_bazel_rules_go//proto:go_proto
+# gazelle:proto_import_prefix github.com/openconfig/bootz
 # gazelle:prefix github.com/openconfig/bootz
 gazelle(name = "gazelle")
