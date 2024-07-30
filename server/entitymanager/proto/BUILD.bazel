@@ -26,11 +26,10 @@ proto_library(
 
 go_proto_library(
     name = "entity_go_proto",
-    compilers = ["@io_bazel_rules_go//proto:go_grpc"],
     importpath = "github.com/openconfig/bootz/server/entitymanager/proto/entity",
     proto = ":entity_proto",
     deps = [
-        "//proto:bootz_go_proto",
+        "//proto:bootz",
         "@openconfig_gnsi//authz:authz_go_proto",
         "@openconfig_gnsi//certz:certz_go_proto",
         "@openconfig_gnsi//pathz:pathz_go_proto",
@@ -41,4 +40,10 @@ go_library(
     name = "entity",
     embed = [":entity_go_proto"],
     importpath = "github.com/openconfig/server/entitymanager/proto/entity",
+)
+
+go_library(
+    name = "proto",
+    embed = [":entity_go_proto"],
+    importpath = "github.com/openconfig/bootz/server/entitymanager/proto/entity",
 )

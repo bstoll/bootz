@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
 
 go_library(
     name = "entitymanager",
@@ -20,9 +20,37 @@ go_library(
     importpath = "github.com/openconfig/bootz/server/entitymanager",
     visibility = ["//visibility:public"],
     deps = [
+        "//common/owner_certificate",
+        "//common/signature",
         "//proto:bootz",
+        "//server/entitymanager/proto",
         "//server/service",
+        "@com_github_golang_glog//:glog",
+        "@openconfig_gnsi//authz:authz_go_proto",
         "@org_golang_google_grpc//codes",
         "@org_golang_google_grpc//status",
+        "@org_golang_google_protobuf//encoding/prototext",
+        "@org_golang_google_protobuf//proto",
+    ],
+)
+
+go_test(
+    name = "entitymanager_test",
+    srcs = ["entitymanager_test.go"],
+    data = glob(["testdata/**"]),
+    embed = [":entitymanager"],
+    deps = [
+        "//common/owner_certificate",
+        "//common/signature",
+        "//proto:bootz",
+        "//server/entitymanager/proto",
+        "//server/service",
+        "//testdata:testdata_lib",
+        "@com_github_google_go_cmp//cmp",
+        "@com_github_google_go_cmp//cmp/cmpopts",
+        "@com_github_h_fam_errdiff//:errdiff",
+        "@openconfig_gnsi//authz:authz_go_proto",
+        "@org_golang_google_protobuf//proto",
+        "@org_golang_google_protobuf//testing/protocmp",
     ],
 )
