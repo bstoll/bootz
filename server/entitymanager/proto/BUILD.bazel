@@ -1,11 +1,9 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_library")
 load("@io_bazel_rules_go//proto:def.bzl", "go_proto_library")
 load("@rules_proto//proto:defs.bzl", "proto_library")
-load("//:common.bzl", "use_new_compilers")
+load("@rules_proto_grpc_cpp//:defs.bzl", "cpp_grpc_library")
 
 package(default_visibility = ["//visibility:public"])
-
-use_new_compilers()
 
 proto_library(
     name = "entity_proto",
@@ -17,6 +15,21 @@ proto_library(
         "@openconfig_gnsi//authz:authz_proto",
         "@openconfig_gnsi//certz:certz_proto",
         "@openconfig_gnsi//pathz:pathz_proto",
+    ],
+)
+
+##############################################################################
+# C++
+##############################################################################
+
+cpp_grpc_library(
+    name = "entity_cc_proto",
+    protos = [":entity_proto"],
+    deps = [
+        "//proto:bootz_cc_proto",
+        "@openconfig_gnsi//authz:authz_cc_proto",
+        "@openconfig_gnsi//certz:certz_cc_proto",
+        "@openconfig_gnsi//pathz:pathz_cc_proto",
     ],
 )
 
